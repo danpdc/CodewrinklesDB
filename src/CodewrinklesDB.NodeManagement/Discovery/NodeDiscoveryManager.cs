@@ -1,16 +1,29 @@
-﻿using CodewrinklesDB.NodeManagement.Nodes;
+﻿using CodewrinklesDB.NodeManagement.Discovery.Messages;
+using CodewrinklesDB.NodeManagement.Nodes;
+using Wolverine;
 
 namespace CodewrinklesDB.NodeManagement.Discovery;
 
-public class NodeDiscoveryManager(DiscoverySender sender, DiscoveryListener listener, 
-    Node activeNode) : IAsyncDisposable
+public class NodeDiscoveryManager : IAsyncDisposable
 {
+    private readonly DiscoverySender _sender;
+    private readonly DiscoveryListener _listener;
+    private Node _activeNode;
+    private readonly IMessageBus _bus;
+    public NodeDiscoveryManager(DiscoverySender sender, DiscoveryListener listener, 
+        Node activeNode, IMessageBus bus)
+    {
+        _sender = sender;
+        _listener = listener;
+        _activeNode = activeNode;
+        _bus = bus;
+    }
     public async Task AdvertiseNewNodeAsync(CancellationToken stoppingToken)
     {
         try
         {
-            if (activeNode.ClusterRole == ClusterRole.Unregistered)
-                await sender.SendDiscoveryMessageAsync(activeNode, stoppingToken);
+            if (_activeNode.ClusterRole == ClusterRole.Unregistered)
+                await _sender.SendDiscoveryMessageAsync(_activeNode, stoppingToken);
         }
         catch (Exception ex)
         {
@@ -18,13 +31,22 @@ public class NodeDiscoveryManager(DiscoverySender sender, DiscoveryListener list
         }
     }
 
+    public async Task AdvertiseNodeAsync2(CancellationToken token)
+    {
+        var command = new StartListeningForJoiningNodes()
+        {
+            StoppingToken = token
+        };
+        await _bus.SendAsync(command);
+    }
+
     public async Task ListenForNodeAdvertisements(CancellationToken stoppingToken)
     {
-        await listener.StartListeningAsync(activeNode, stoppingToken);
+        await _listener.StartListeningAsync(_activeNode, stoppingToken);
     }
 
     public async ValueTask DisposeAsync()
     {
-        await listener.StopListeningAsync(activeNode);
+        await _listener.StopListeningAsync(_activeNode);
     }
 }

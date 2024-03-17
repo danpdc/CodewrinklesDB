@@ -1,0 +1,6 @@
+@CodewrinklesDB.TestNodes.Node4_HostAddress = http://localhost:5273
+
+GET {{CodewrinklesDB.TestNodes.Node4_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
