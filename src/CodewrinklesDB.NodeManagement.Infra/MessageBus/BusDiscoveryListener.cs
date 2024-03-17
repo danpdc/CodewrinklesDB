@@ -10,7 +10,7 @@ namespace CodewrinklesDB.NodeManagement.Infra.MessageBus;
 public class BusDiscoveryListener : IDiscoveryListener
 {
     private const string ConnectionString =
-        "Endpoint=sb://codewrinklesdb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=rvB866Va0+2nJ1a4QolKxOn7XcVKYZ7Wk+ASbASIKms=";
+        "{Service Bus Connection string}";
     private const string TopicName = "noderegistration";
     private ServiceBusClient? _client;
     private ServiceBusProcessor? _processor;
