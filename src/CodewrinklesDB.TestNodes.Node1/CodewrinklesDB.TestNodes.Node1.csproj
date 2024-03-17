@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-CodewrinklesDB.TestNodes.Node1-9F32BD83-C94E-4375-90C0-A099E9DF3D8F</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CodewrinklesDB.NodeManagement.Infra\CodewrinklesDB.NodeManagement.Infra.csproj" />
+      <ProjectReference Include="..\CodewrinklesDB.NodeManagement\CodewrinklesDB.NodeManagement.csproj" />
+    </ItemGroup>
+</Project>
