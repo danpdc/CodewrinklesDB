@@ -1,6 +1,6 @@
 ﻿using CodewrinklesDB.NodeManagement.Discovery;
 
-namespace CodewrinklesDB.TestNodes.Node4;
+namespace CodewrinklesDB.TestNodes.Node1;
 
 public class NodeStartup(NodeDiscoveryManager manager) : BackgroundService
 {

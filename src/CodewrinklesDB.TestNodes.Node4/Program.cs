@@ -46,6 +46,6 @@ Node GetNode()
         AvailableDiskSpace = disk
     };
 
-    return new Node(nodeId, ipAddress, 12345, "Node4", capacity, ClusterRole.Leader,
-        "Test node 2");
+    return new Node(nodeId, ipAddress, 12345, "Node4", capacity, ClusterRole.Unregistered,
+        "Test node 4");
 }

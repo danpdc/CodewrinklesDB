@@ -4,20 +4,36 @@ using CodewrinklesDB.NodeManagement.Extensions;
 using CodewrinklesDB.NodeManagement.Infra.Extensions;
 using CodewrinklesDB.NodeManagement.Nodes;
 using CodewrinklesDB.TestNodes.Node1;
+using Wolverine;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Host.UseWolverine();
+
 builder.Services.AddNodeManagementInfrastructure();
 builder.Services.AddNodeDiscovery();
-builder.Services.AddHostedService<NodeAdvertising>();
+builder.Services.AddHostedService<NodeStartup>();
 var node = GetNode();
 builder.Services.AddSingleton(node);
 
-var host = builder.Build();
-host.Run();
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.Run();
 
 Node GetNode()
 {
-    Guid nodeId = Guid.Parse("c6934ea5-23d1-472a-a7fe-6f6815118f7e");
+    Guid nodeId = Guid.Parse("61053474-73e2-406a-831e-edf6c90ef5e5");
     string hostName = Dns.GetHostName();
     var ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
     var cores = Environment.ProcessorCount;
@@ -30,6 +46,6 @@ Node GetNode()
         AvailableDiskSpace = disk
     };
 
-    return new Node(nodeId, ipAddress, 12345, "Node1", capacity, ClusterRole.Leader,
-        "Test node 2");
+    return new Node(nodeId, ipAddress, 12345, "Node1", capacity, ClusterRole.Unregistered,
+        "Test node 1");
 }
