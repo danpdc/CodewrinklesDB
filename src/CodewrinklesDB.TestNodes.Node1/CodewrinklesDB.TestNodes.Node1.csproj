@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CodewrinklesDB.NodeManagement.Infra\CodewrinklesDB.NodeManagement.Infra.csproj" />
+      <ProjectReference Include="..\CodewrinklesDB.Persistence.Mongo\CodewrinklesDB.Persistence.Mongo.csproj" />
     </ItemGroup>
 
 </Project>
