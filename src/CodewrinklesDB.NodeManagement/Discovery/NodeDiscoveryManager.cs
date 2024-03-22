@@ -21,6 +21,7 @@ public class NodeDiscoveryManager : IAsyncDisposable
 
     public async Task AdvertiseNodeAsync(CancellationToken token)
     {
+        await _sender.SendDiscoveryMessageAsync(_activeNode, token);
         var command = new StartListeningForJoiningNodes()
         {
             StoppingToken = token
