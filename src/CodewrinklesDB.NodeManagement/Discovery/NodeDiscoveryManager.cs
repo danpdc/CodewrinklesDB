@@ -31,11 +31,11 @@ public class NodeDiscoveryManager : IAsyncDisposable
 
     public async Task ListenForNodeAdvertisements(CancellationToken stoppingToken)
     {
-        await _listener.StartListeningAsync(_activeNode, stoppingToken);
+        await _listener.StartListeningAsync(stoppingToken);
     }
 
     public async ValueTask DisposeAsync()
     {
-        await _listener.StopListeningAsync(_activeNode);
+        await _listener.StopListeningAsync();
     }
 }
