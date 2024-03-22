@@ -3,7 +3,6 @@ using System.Net;
 using CodewrinklesDB.NodeManagement.Extensions;
 using CodewrinklesDB.NodeManagement.Infra.Extensions;
 using CodewrinklesDB.NodeManagement.Nodes;
-using CodewrinklesDB.Persistence.Mongo.Extensions;
 using CodewrinklesDB.TestNodes.Node1;
 using Wolverine;
 
@@ -19,8 +18,6 @@ builder.Services.AddNodeDiscovery();
 builder.Services.AddHostedService<NodeStartup>();
 var node = GetNode();
 builder.Services.AddSingleton(node);
-
-builder.Services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
