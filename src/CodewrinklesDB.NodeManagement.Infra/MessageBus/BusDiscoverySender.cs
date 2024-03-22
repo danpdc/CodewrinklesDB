@@ -8,7 +8,7 @@ namespace CodewrinklesDB.NodeManagement.Infra.MessageBus;
 public class BusDiscoverySender : IDiscoverySender
 {
     private const string ConnectionString =
-        "{Service Bus Connection string}";
+        "Endpoint=sb://codewrinklesdb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=OR46v17GsqFVy8+KiQY0x88USWrzqU0LF+ASbHZR/ZU=";
     
     public async Task SendDiscoveryMessageAsync(NewNodeMessage newNode, CancellationToken stoppingToken)
     {

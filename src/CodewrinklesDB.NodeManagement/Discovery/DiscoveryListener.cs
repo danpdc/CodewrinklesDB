@@ -28,14 +28,8 @@ public class DiscoveryListener
     
     private void OnNodeDiscovered(object? sender, Node newNode)
     {
-        if (AreAdvertisingAndListeningNodesSame(newNode)) return;
-        Console.WriteLine($"New Node discovered: {newNode.NodeName}");
         NewNodeDiscovered?.Invoke(sender, newNode);
-        
     }
     
-    private bool AreAdvertisingAndListeningNodesSame(Node newNode)
-    {
-        return _listeningNode == newNode;
-    }
+    
 }

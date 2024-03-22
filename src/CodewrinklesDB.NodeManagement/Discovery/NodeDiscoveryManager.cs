@@ -31,11 +31,23 @@ public class NodeDiscoveryManager : IAsyncDisposable
 
     public async Task ListenForNodeAdvertisements(CancellationToken stoppingToken)
     {
+        _listener.NewNodeDiscovered += ProcessNewNodeAsync;
         await _listener.StartListeningAsync(stoppingToken);
     }
 
     public async ValueTask DisposeAsync()
     {
         await _listener.StopListeningAsync();
+    }
+
+    private async void ProcessNewNodeAsync(object? sender, Node newNode)
+    {
+        if (AreAdvertisingAndListeningNodesSame(newNode)) return;
+        Console.WriteLine($"Processing new node: {newNode.NodeName}");
+    }
+    
+    private bool AreAdvertisingAndListeningNodesSame(Node newNode)
+    {
+        return _activeNode == newNode;
     }
 }
