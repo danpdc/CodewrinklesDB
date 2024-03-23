@@ -4,5 +4,6 @@ namespace CodewrinklesDB.Common.Abstractions;
 
 public interface IWriteAheadLogger
 {
-    Task LogAdvertisedNodeAsync(Node advertisedNode);
+    Task InsertAdvertisedNodeAsync(string nodeData);
+    Task UpdateAdvertisedNodeAsync(string nodeData);
 }

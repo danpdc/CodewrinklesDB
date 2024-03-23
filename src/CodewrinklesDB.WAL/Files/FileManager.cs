@@ -6,7 +6,7 @@ public static class FileManager
     private const string LogDirectory = "Logs";
     private const string LogFilePathTemplate = "wal-{0}.log";
     
-    public static string GetCurrentLogFilePathAsync()
+    public static string GetCurrentLogFilePath()
     {
         var logDirectory = GetCreateLogDirectory();
 

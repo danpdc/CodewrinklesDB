@@ -3,5 +3,6 @@
 public enum LogType
 {
     InsertAdvertisedNode,
+    UpdateAdvertisedNode,
     IncrementIndex
 }
