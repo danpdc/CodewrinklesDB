@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Azure.Messaging.ServiceBus.Administration;
+using CodewrinklesDB.Common.Nodes;
 using CodewrinklesDB.NodeManagement.Abstractions;
 using CodewrinklesDB.NodeManagement.Discovery;
-using CodewrinklesDB.NodeManagement.Nodes;
 
 namespace CodewrinklesDB.NodeManagement.Infra.MessageBus;
 

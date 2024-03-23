@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Azure.Messaging.ServiceBus.Administration;
-using CodewrinklesDB.NodeManagement.Nodes;
+using CodewrinklesDB.Common.Nodes;
 
 namespace CodewrinklesDB.WAL.Indexer;
 

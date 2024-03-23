@@ -11,4 +11,8 @@
       <PackageReference Include="WolverineFx" Version="2.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CodewrinklesDB.Common\CodewrinklesDB.Common.csproj" />
+    </ItemGroup>
+
 </Project>

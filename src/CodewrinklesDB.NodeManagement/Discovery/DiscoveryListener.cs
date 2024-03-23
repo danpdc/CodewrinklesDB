@@ -1,5 +1,5 @@
-﻿using CodewrinklesDB.NodeManagement.Abstractions;
-using CodewrinklesDB.NodeManagement.Nodes;
+﻿using CodewrinklesDB.Common.Nodes;
+using CodewrinklesDB.NodeManagement.Abstractions;
 
 namespace CodewrinklesDB.NodeManagement.Discovery;
 

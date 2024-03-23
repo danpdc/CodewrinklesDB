@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodewrinklesDB.WAL", "Codew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodewrinklesDB.Persistence.Mongo", "CodewrinklesDB.Persistence.Mongo\CodewrinklesDB.Persistence.Mongo.csproj", "{EA86B0FA-E040-43E1-9DB0-12CACDCE2A45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodewrinklesDB.Common", "CodewrinklesDB.Common\CodewrinklesDB.Common.csproj", "{053B2EE6-7941-4248-A26A-DE7FC2671279}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{EA86B0FA-E040-43E1-9DB0-12CACDCE2A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA86B0FA-E040-43E1-9DB0-12CACDCE2A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA86B0FA-E040-43E1-9DB0-12CACDCE2A45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053B2EE6-7941-4248-A26A-DE7FC2671279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053B2EE6-7941-4248-A26A-DE7FC2671279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053B2EE6-7941-4248-A26A-DE7FC2671279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053B2EE6-7941-4248-A26A-DE7FC2671279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5BCD08C8-460D-4AE4-A801-6131BBF017CA} = {59875F70-E2D9-439E-9173-614AF46EF6E9}

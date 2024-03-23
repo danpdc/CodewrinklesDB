@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Net;
+using CodewrinklesDB.Common.Nodes;
 using CodewrinklesDB.NodeManagement.Extensions;
 using CodewrinklesDB.NodeManagement.Infra.Extensions;
-using CodewrinklesDB.NodeManagement.Nodes;
 using CodewrinklesDB.Persistence.Mongo.Extensions;
 using CodewrinklesDB.TestNodes.Node3;
 using CodewrinklesDB.WAL.Extensions;

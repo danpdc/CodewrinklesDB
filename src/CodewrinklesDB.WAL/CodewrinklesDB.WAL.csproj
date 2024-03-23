@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CodewrinklesDB.NodeManagement\CodewrinklesDB.NodeManagement.csproj" />
+      <ProjectReference Include="..\CodewrinklesDB.Common\CodewrinklesDB.Common.csproj" />
     </ItemGroup>
 
 </Project>

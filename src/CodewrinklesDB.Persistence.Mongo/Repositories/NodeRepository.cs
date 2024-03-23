@@ -1,5 +1,6 @@
-﻿using CodewrinklesDB.NodeManagement.Abstractions;
-using CodewrinklesDB.NodeManagement.Nodes;
+﻿using CodewrinklesDB.Common.Nodes;
+using CodewrinklesDB.NodeManagement.Abstractions;
+
 using MongoDB.Driver;
 
 namespace CodewrinklesDB.Persistence.Mongo.Repositories;

@@ -1,4 +1,4 @@
-﻿namespace CodewrinklesDB.NodeManagement.Nodes;
+﻿namespace CodewrinklesDB.Common.Nodes;
 
 public class Capacity
 {

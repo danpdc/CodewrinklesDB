@@ -1,5 +1,5 @@
-﻿using CodewrinklesDB.NodeManagement.Discovery.Messages;
-using CodewrinklesDB.NodeManagement.Nodes;
+﻿using CodewrinklesDB.Common.Nodes;
+using CodewrinklesDB.NodeManagement.Discovery.Messages;
 using Wolverine;
 
 namespace CodewrinklesDB.NodeManagement.Discovery;

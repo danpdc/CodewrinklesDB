@@ -1,6 +1,6 @@
 ﻿namespace CodewrinklesDB.WAL.Files;
 
-public class LogReader
+public static class LogReader
 {
     public static async Task<IEnumerable<Log>> ReadLogsAsync(string logFilePath)
     {

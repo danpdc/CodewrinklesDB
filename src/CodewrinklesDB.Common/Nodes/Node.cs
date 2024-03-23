@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace CodewrinklesDB.NodeManagement.Nodes;
+﻿namespace CodewrinklesDB.Common.Nodes;
 
 public class Node : IEquatable<Node>
 {

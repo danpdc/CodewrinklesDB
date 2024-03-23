@@ -1,6 +1,6 @@
 ﻿namespace CodewrinklesDB.WAL.Files;
 
-public class FileLogger
+public static class FileLogger
 {
     public static async Task InsertLogAsync(Log log, string logFilePath)
     {

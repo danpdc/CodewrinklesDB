@@ -1,7 +1,7 @@
 ﻿
 namespace CodewrinklesDB.WAL.Files;
 
-public class FileManager
+public static class FileManager
 {
     private const string LogDirectory = "Logs";
     private const string LogFilePathTemplate = "wal-{0}.log";
