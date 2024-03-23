@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Azure.Messaging.ServiceBus.Administration;
+using CodewrinklesDB.Common.Nodes;
 using CodewrinklesDB.NodeManagement.Abstractions;
 using CodewrinklesDB.NodeManagement.Discovery;
-using CodewrinklesDB.NodeManagement.Nodes;
 
 namespace CodewrinklesDB.NodeManagement.Infra.MessageBus;
 
@@ -43,9 +43,14 @@ public class BusDiscoveryListener : IDiscoveryListener
     
     private async Task MessageHandler(ProcessMessageEventArgs args)
     {
-        string jsonBody = args.Message.Body.ToString();
+        var jsonBody = args.Message.Body.ToString();
         var newNode = JsonSerializer.Deserialize<NewNodeMessage>(jsonBody);
-        Console.WriteLine($"Processing advertisement for node: {newNode?.Node?.NodeName}");
+        
+        if (newNode is not null && IsMessageOlderThan10Seconds(newNode))
+        {
+            await args.CompleteMessageAsync(args.Message);
+            return;
+        }
 
         // complete the message. messages is deleted from the subscription. 
         await args.CompleteMessageAsync(args.Message);
@@ -72,5 +77,10 @@ public class BusDiscoveryListener : IDiscoveryListener
             listeningNode.NodeName, stoppingToken);
         return listeningNode.NodeName;
 
+    }
+    
+    private bool IsMessageOlderThan10Seconds(NewNodeMessage message)
+    {
+        return DateTimeOffset.UtcNow - message.Timestamp > TimeSpan.FromSeconds(10);
     }
 }

@@ -1,9 +1,10 @@
 using System.Diagnostics;
 using System.Net;
+using CodewrinklesDB.Common.Nodes;
 using CodewrinklesDB.NodeManagement.Extensions;
 using CodewrinklesDB.NodeManagement.Infra.Extensions;
-using CodewrinklesDB.NodeManagement.Nodes;
 using CodewrinklesDB.TestNodes.Node4;
+using CodewrinklesDB.WAL.Extensions;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddNodeDiscovery();
 builder.Services.AddHostedService<NodeStartup>();
 var node = GetNode();
 builder.Services.AddSingleton(node);
+builder.Services.RegisterWriteAheadLog();
 
 var app = builder.Build();
 

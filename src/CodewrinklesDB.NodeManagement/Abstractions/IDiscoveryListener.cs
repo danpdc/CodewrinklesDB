@@ -1,4 +1,4 @@
-﻿using CodewrinklesDB.NodeManagement.Nodes;
+﻿using CodewrinklesDB.Common.Nodes;
 
 namespace CodewrinklesDB.NodeManagement.Abstractions;
 
