@@ -1,5 +1,5 @@
 ﻿
-namespace CodewrinklesDB.WAL;
+namespace CodewrinklesDB.WAL.Files;
 
 public class FileManager
 {
