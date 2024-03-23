@@ -16,7 +16,7 @@ public class NodeRepository : INodeRepository
     
     public async Task<bool> IsNodePendingAcceptanceAsync(Guid nodeId)
     {
-        var filter = Builders<Node>.Filter.Exists(n => n.NodeId == nodeId);
+        var filter = Builders<Node>.Filter.Eq(n => n.NodeId, nodeId);
         var collection = _connection.Client.GetDatabase(_connection.DatabaseName)
             .GetCollection<Node>(_connection.PendingAcceptanceCollection);
         return await collection.Find(filter).AnyAsync();

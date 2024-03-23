@@ -4,7 +4,7 @@ namespace CodewrinklesDB.WAL.Files;
 public static class FileManager
 {
     private const string LogDirectory = "Logs";
-    private const string LogFilePathTemplate = "wal-{0}.log";
+    private const string LogFilePathTemplate = "wal-{0}.txt";
     
     public static string GetCurrentLogFilePath()
     {
@@ -47,9 +47,11 @@ public static class FileManager
 
     private static string CreateFile(string logDirectory)
     {
-        var newLogFileName =Path.Combine(logDirectory, 
+        var newLogFileName = Path.Combine(logDirectory, 
             string.Format(LogFilePathTemplate, DateTime.Now.ToString("dd-MM-yyyy")));
-        File.Create(newLogFileName);
+        using var fileStream = File.Create(newLogFileName);
+        fileStream.Flush();
+        fileStream.Close();
         return newLogFileName;
     }
 }

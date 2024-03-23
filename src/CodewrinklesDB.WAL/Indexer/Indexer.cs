@@ -17,7 +17,7 @@ public class Indexer
     {
         var logFilePath = FileManager.GetCurrentLogFilePath();
         var index = await LogReader.ReadLastLogIndexAsync(logFilePath);
-        CurrentIndex = ++index;
+        CurrentIndex = index;
     }
 
     public async Task StartListeningAsync()
@@ -36,9 +36,9 @@ public class Indexer
         var newIndex = ++CurrentIndex;
         var indexUpdate = new IndexUpdate {NewIndex = newIndex};
         var jsonData = JsonSerializer.Serialize(indexUpdate);
-        var logFilePath = FileManager.GetCurrentLogFilePath();
-        var log = new Log(newIndex, LogType.IncrementIndex, jsonData, DateTimeOffset.UtcNow);
-        await FileLogger.InsertLogAsync(log, logFilePath);
+        //var logFilePath = FileManager.GetCurrentLogFilePath();
+        //var log = new Log(newIndex, LogType.IncrementIndex, jsonData, DateTimeOffset.UtcNow);
+        //await FileLogger.InsertLogAsync(log, logFilePath);
         CurrentIndex = newIndex;
 
         try

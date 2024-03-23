@@ -49,24 +49,23 @@ public class NodeDiscoveryManager : IAsyncDisposable
 
     private async void ProcessNewNodeAsync(object? sender, Node newNode)
     {
-        if (AreAdvertisingAndListeningNodesSame(newNode)) return;
+        await AddOrUpdateNodeInPendingAcceptanceAsync(newNode);
+    }
+    
+    private async Task AddOrUpdateNodeInPendingAcceptanceAsync(Node newNode)
+    {
         var jsonData = JsonSerializer.Serialize(newNode);
         if (await _repo.IsNodePendingAcceptanceAsync(newNode.NodeId))
-        {
-            await _wal.InsertAdvertisedNodeAsync(jsonData);
-            await _repo.AddNodeToPendingAcceptanceAsync(newNode);
-            Console.WriteLine($"Persisted node: {newNode.NodeName} to pending acceptance.");
-        }
-        else
         {
             await _wal.UpdateAdvertisedNodeAsync(jsonData);
             await _repo.UpdatedNodeInPendingAcceptanceAsync(newNode);
             Console.WriteLine($"Updated node: {newNode.NodeName} in pending acceptance.");
         }
-    }
-    
-    private bool AreAdvertisingAndListeningNodesSame(Node newNode)
-    {
-        return _activeNode == newNode;
+        else
+        {
+            await _wal.InsertAdvertisedNodeAsync(jsonData);
+            await _repo.AddNodeToPendingAcceptanceAsync(newNode);
+            Console.WriteLine($"Persisted node: {newNode.NodeName} to pending acceptance.");
+        }
     }
 }

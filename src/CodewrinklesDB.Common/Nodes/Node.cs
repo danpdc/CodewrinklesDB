@@ -1,4 +1,6 @@
-﻿namespace CodewrinklesDB.Common.Nodes;
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace CodewrinklesDB.Common.Nodes;
 
 public class Node : IEquatable<Node>
 {
@@ -15,6 +17,8 @@ public class Node : IEquatable<Node>
         NodeDescription = nodeDescription;
         ClusterRole = clusterRole;
     }
+    
+    [BsonId]
     public Guid NodeId { get; }
     public string IpAddress { get; set; }
     public int Port { get; set; }
