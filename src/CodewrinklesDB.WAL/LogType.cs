@@ -2,5 +2,5 @@
 
 public enum LogType
 {
-    UpdateWalIndex,
+    InsertAdvertisedNode,
 }
