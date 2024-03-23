@@ -10,7 +10,8 @@ public class Indexer
     {
         _messagingService = messagingService;
     }
-    public int CurrentIndex { get; private set; }
+
+    private int CurrentIndex { get; set; }
 
     public async Task RebuildIndexState()
     {

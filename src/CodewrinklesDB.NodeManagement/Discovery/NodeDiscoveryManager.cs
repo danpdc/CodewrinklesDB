@@ -1,4 +1,7 @@
-﻿using CodewrinklesDB.Common.Nodes;
+﻿using System.Text.Json;
+using CodewrinklesDB.Common.Abstractions;
+using CodewrinklesDB.Common.Nodes;
+using CodewrinklesDB.NodeManagement.Abstractions;
 using CodewrinklesDB.NodeManagement.Discovery.Messages;
 using Wolverine;
 
@@ -10,13 +13,17 @@ public class NodeDiscoveryManager : IAsyncDisposable
     private readonly DiscoveryListener _listener;
     private readonly Node _activeNode;
     private readonly IMessageBus _bus;
+    private readonly IWriteAheadLogger _wal;
+    private readonly INodeRepository _repo;
     public NodeDiscoveryManager(DiscoverySender sender, DiscoveryListener listener, 
-        Node activeNode, IMessageBus bus)
+        Node activeNode, IMessageBus bus, IWriteAheadLogger wal, INodeRepository repo)
     {
         _sender = sender;
         _listener = listener;
         _activeNode = activeNode;
         _bus = bus;
+        _wal = wal;
+        _repo = repo;
     }
 
     public async Task AdvertiseNodeAsync(CancellationToken token)
@@ -43,7 +50,19 @@ public class NodeDiscoveryManager : IAsyncDisposable
     private async void ProcessNewNodeAsync(object? sender, Node newNode)
     {
         if (AreAdvertisingAndListeningNodesSame(newNode)) return;
-        Console.WriteLine($"Processing new node: {newNode.NodeName}");
+        var jsonData = JsonSerializer.Serialize(newNode);
+        if (await _repo.IsNodePendingAcceptanceAsync(newNode.NodeId))
+        {
+            await _wal.InsertAdvertisedNodeAsync(jsonData);
+            await _repo.AddNodeToPendingAcceptanceAsync(newNode);
+            Console.WriteLine($"Persisted node: {newNode.NodeName} to pending acceptance.");
+        }
+        else
+        {
+            await _wal.UpdateAdvertisedNodeAsync(jsonData);
+            await _repo.UpdatedNodeInPendingAcceptanceAsync(newNode);
+            Console.WriteLine($"Updated node: {newNode.NodeName} in pending acceptance.");
+        }
     }
     
     private bool AreAdvertisingAndListeningNodesSame(Node newNode)
