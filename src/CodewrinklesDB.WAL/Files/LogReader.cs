@@ -17,15 +17,15 @@ public static class LogReader
     public static async Task<int> ReadLastLogIndexAsync(string logFilePath)
     {
         using var streamReader = new StreamReader(logFilePath);
-        Log? log = null;
+        var lastLine = string.Empty;
         while (await streamReader.ReadLineAsync() is { } line)
         {
-            var currentLog = Log.CreateFromString(line);
-            if (currentLog.LogType == LogType.IncrementIndex)
-            {
-                log = currentLog;
-            }
+            lastLine = line;
         }
-        return log?.Key ?? 0;
+
+        if (lastLine == string.Empty) return 0;
+        
+        var lastLog = Log.CreateFromString(lastLine);
+        return lastLog.Key;
     }
 }
